@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: captureorder-deployment
+  labels:
+    app: captureorder
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: captureorder
+  template:
+    metadata:
+      labels:
+        app: captureorder
+    spec:
+      containers:
+      - name: captureorder
+        image: torosent/captureorderack:latest
+        env:
+        - name: TEAMNAME
+          value: "team2"
+        - name: CHALLENGEAPPINSIGHTS_KEY
+          value: 05af4dd2-b47d-4672-9576-8de14b15a4fa
+        - name: MONGOURL
+          value: "mongodb://orderUser:userpassword@littering-hydra-mongodb:27017/k8orders"
+        - name: AMQPURL
+          value: "amqp://user:SgKJjaN58V@opulent-gecko-rabbitmq.default.svc.cluster.local:5672"
+        ports:
+        - containerPort: 80

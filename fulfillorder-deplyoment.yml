@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fulfillorder-deployment
+  labels:
+    app: fulfillorder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fulfillorder
+  template:
+    metadata:
+      labels:
+        app: fulfillorder
+    spec:
+      containers:
+      - name: fulfillorder
+        image: torosent/fulfillorderack:latest
+        env:
+        - name: TEAMNAME
+          value: "team2"
+        - name: CHALLENGEAPPINSIGHTS_KEY
+          value: 05af4dd2-b47d-4672-9576-8de14b15a4fa
+        - name: MONGOURL
+          value: "mongodb://orderUser:userpassword@littering-hydra-mongodb:27017/k8orders"
+        - name: AMQPURL
+          value: "amqp://user:SgKJjaN58V@opulent-gecko-rabbitmq.default.svc.cluster.local:5672"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /orders
+          name: orders
+      volumes:
+      - name: orders
+        persistentVolumeClaim:
+          claimName: azurefile

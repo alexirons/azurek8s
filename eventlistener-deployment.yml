@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventlistener-deployment
+  labels:
+    app: eventlistener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventlistener
+  template:
+    metadata:
+      labels:
+        app: eventlistener
+    spec:
+      containers:
+      - name: eventlistener
+        image: torosent/rabbitmqlistenerack:latest
+        env:
+        - name: TEAMNAME
+          value: "team2"
+        - name: CHALLENGEAPPINSIGHTS_KEY
+          value: 05af4dd2-b47d-4672-9576-8de14b15a4fa
+        - name: PROCESSENDPOINT
+          value: "http://fulfillorder-service.default.svc.cluster.local:8080/v1/order/"
+        - name: AMQPURL
+          value: "amqp://user:SgKJjaN58V@opulent-gecko-rabbitmq.default.svc.cluster.local:5672"
+        ports:
+        - containerPort: 80
