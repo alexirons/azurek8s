@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qlistener-deployment
+  labels:
+    app: qlistener
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qlistener
+  template:
+    metadata:
+      labels:
+        app: qlistener
+    spec:
+      containers:
+      - name: qlistener
+        image: torosent/sbqueuelistenerack:latest
+        env:
+        - name: TEAMNAME
+          value: "team2"
+        - name: CHALLENGEAPPINSIGHTS_KEY
+          value: 05af4dd2-b47d-4672-9576-8de14b15a4fa
+        - name: SERVICEBUSCONNSTRING
+          value: "Endpoint=sb://service-bus-azure.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=LaQtfH1C+BI1BMLeTqdIt5hLtXx2Q5/hVkfLG9Afw4I="
+        - name: SERVICEBUSQUEUENAME
+          value: "orders"
+        - name: PROCESSENDPOINT
+          value: "http://fulfillorder-service.default.svc.cluster.local:8080/v1/order/"
+        - name: APPINSIGHTS_KEY
+          value: "idi7fchvw7js26slll2cf1fx8zso7mzquu3e5elf"
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
