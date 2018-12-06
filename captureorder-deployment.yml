@@ -23,8 +23,15 @@ spec:
         - name: CHALLENGEAPPINSIGHTS_KEY
           value: 05af4dd2-b47d-4672-9576-8de14b15a4fa
         - name: MONGOURL
-          value: "mongodb://orderUser:userpassword@littering-hydra-mongodb:27017/k8orders"
+          value: "mongodb://databse-cosmos-mongo-db:oy7q7X7rU2pRTN0fAuOHyp6ZfbOg6h586RCF0aN9v73W21bE1pOUdbjEPej10ELLq7PPfwkqMwNRQzZIWTEw7Q==@databse-cosmos-mongo-db.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
         - name: AMQPURL
           value: "amqp://user:SgKJjaN58V@opulent-gecko-rabbitmq.default.svc.cluster.local:5672"
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

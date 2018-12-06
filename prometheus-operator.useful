@@ -1,0 +1,41 @@
+NAME:   prometheus-operator
+LAST DEPLOYED: Thu Dec  6 12:53:19 2018
+NAMESPACE: monitoring
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1beta1/ClusterRoleBinding
+NAME                     AGE
+prometheus-operator      1m
+psp-prometheus-operator  1m
+
+==> v1beta1/Deployment
+prometheus-operator  1m
+
+==> v1/Pod(related)
+
+NAME                               READY  STATUS   RESTARTS  AGE
+prometheus-operator-858c485-4hg9f  1/1    Running  0         1m
+
+==> v1beta1/PodSecurityPolicy
+
+NAME                 AGE
+prometheus-operator  1m
+
+==> v1/ConfigMap
+prometheus-operator  1m
+
+==> v1/ServiceAccount
+prometheus-operator  1m
+
+==> v1beta1/ClusterRole
+prometheus-operator      1m
+psp-prometheus-operator  1m
+
+
+NOTES:
+The Prometheus Operator has been installed. Check its status by running:
+  kubectl --namespace monitoring get pods -l "app=prometheus-operator,release=prometheus-operator"
+
+Visit https://github.com/coreos/prometheus-operator for instructions on how
+to create & configure Alertmanager and Prometheus instances using the Operator.

@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  creationTimestamp: "2018-12-06T10:10:33Z"
+  name: captureorder-deployment
+  namespace: default
+  resourceVersion: "172399"
+  selfLink: /apis/autoscaling/v1/namespaces/default/horizontalpodautoscalers/captureorder-deployment
+  uid: 2ae878d5-f93f-11e8-9486-8e0f293339d0
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: captureorder-deployment
+  targetCPUUtilizationPercentage: 50
+status:
+  currentReplicas: 3
+  desiredReplicas: 0

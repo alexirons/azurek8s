@@ -28,3 +28,10 @@ spec:
           value: "amqp://user:SgKJjaN58V@opulent-gecko-rabbitmq.default.svc.cluster.local:5672"
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
